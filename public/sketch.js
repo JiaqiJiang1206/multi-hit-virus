@@ -24,7 +24,7 @@ function setup() {
 	// socket = io.connect('http://localhost:3000');
 	// socket = io.connect('http://5386w319o8.qicp.vip');
 	// socket = io.connect('http://192.168.8.160:3000');
-	socket = io.connect('http://1.117.224.110:80');
+	socket = io.connect('http://1.117.224.110:4000');
 	
 	video = createCapture(VIDEO);
 	video.size(640, 480);
