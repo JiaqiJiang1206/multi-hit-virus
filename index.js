@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 const cors = require('cors');
-var server = app.listen(3000);
+const server = app.listen(3000);
+const io = require('socket.io')(server);
 
 // app.get("/", (req, res) => {
 //   res.send(`Hello World!`);
@@ -22,7 +23,7 @@ function listen() {
 
 app.use(express.static('public'));
 
-var io = require('socket.io')(server);
+
 
 io.sockets.on('connection', newConnection);
 
