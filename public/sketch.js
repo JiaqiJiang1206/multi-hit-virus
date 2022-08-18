@@ -33,6 +33,21 @@ function setup() {
 	rectMode(CORNERS);// rect() 的前两个参数解读成形状其中一个角落的位置，而第三和第四个参数则被解读成对面角落的位置
 	ran = random(330, 420);//判定线的位置
 	x = ran+3-320;//计算药剂底部与判定线的距离
+	var data = {
+		gameStateTemp : gameState,
+		chaTemp : cha,
+		danTemp : dan,
+		needleStateTemp : needleState,
+		virusRtemp : virusR,
+		ranTemp : ran,
+		xTemp : x,
+		bulStateTemp : bulState
+
+	}
+	socket.on('game', function(data){//接收游戏状态
+		gameState = data.gameStateTemp;
+
+	});
 
 
 }
@@ -58,17 +73,8 @@ function keyPressed(){
 		ran = random(330, 420);//判定线的位置
 		x = ran+3-320;//计算药剂底部与判定线的距离
 		bulState = 0;//子弹存在的状态
-		var data = {
-			gameStateTemp : gameState,
-			chaTemp : cha,
-			danTemp : dan,
-			needleStateTemp : needleState,
-			virusRtemp : virusR,
-			ranTemp : ran,
-			xTemp : x,
-			bulStateTemp : bulState
-	
-		}
+		
+		socket.emit('game', data);//传输游戏状态到服务器端
 		socket.emit('keys', data);
 
 	  }
@@ -89,11 +95,8 @@ function draw(){
 		bulStateTemp : bulState
 
 	}
-	socket.emit('game', data);//传输游戏数据到服务器端 
-	socket.on('game', function(data){//接收游戏状态
-		gameState = data.gameStateTemp;
+	 
 
-	});
 	socket.on('keys', function(data){
 		console.log('start');
 		gameState = 1;
@@ -170,6 +173,7 @@ function draw(){
 		}else{
 			image(boom, width/3+virusR/2, 0, 200-virusR, 200-virusR);//显示爆炸效果
 			gameState = 0;
+			socket.emit('game', data);//传输游戏状态到服务器端
 		}
 		if(gameState){
 			rect(width/3+77, 320, width/3+80+20, 320+cha);//画注射剂药剂,cha = 87则满
