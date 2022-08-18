@@ -23,7 +23,6 @@ function preload(){
 function setup() {
 	socket = io.connect('https://git.heroku.com/multi-hit-virus.git');
 	// socket = io.connect('http://192.168.8.160:3000');
-
 	
 	video = createCapture(VIDEO);
 	video.size(640, 480);
