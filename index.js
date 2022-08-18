@@ -50,7 +50,7 @@ function newConnection(socket){
 		data.needleStateTemp = 0;
 
 		data.bulStateTemp = 0;
-    socket.broadcast.emit('game', data);//向其他所有客户端传输游戏数据
+    socket.broadcast.emit('keys', data);//向其他所有客户端传输游戏数据
     // console.log(gameState);
   })
 
