@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 const server = app.listen(3000);
 const io = require('socket.io')(server);
+console.log('server is running');
 
 // app.get("/", (req, res) => {
 //   res.send(`Hello World!`);
@@ -13,6 +14,8 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     next();
 });
+
+var PORT = process.env.PORT || 3000;
 
 
 function listen() {
