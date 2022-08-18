@@ -1,5 +1,3 @@
-const { text } = require("express");
-
 //8_17_2
 var socket;
 let video;
@@ -169,7 +167,7 @@ function draw(){
 			scores++;
 			// virusR += 10;//放到服务端上
 			socket.emit('virus', data);
-			// console.log(virusR);
+			console.log(scores);
 
 		}
 		// console.log(d1);
@@ -187,7 +185,6 @@ function draw(){
 
 	}
 	if(gameState){
-		text('scores: '+scores, 20, 20, 30, 30);
 		image(needle, width/3+25, 280, 130, 200);//显示正下方的注射器
 		strokeWeight(3);
 		fill('red');
