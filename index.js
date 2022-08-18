@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require('cors');
-const server = app.listen(3000);
+// const server = app.listen(3000);
 const io = require('socket.io')(server);
 console.log('server is running');
 
@@ -15,7 +15,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-var PORT = process.env.PORT || 3000;
+var port = process.env.PORT || 3000;
 
 
 function listen() {
