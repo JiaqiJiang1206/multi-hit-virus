@@ -1,3 +1,5 @@
+const { text } = require("express");
+
 //8_17_2
 var socket;
 let video;
@@ -11,6 +13,7 @@ let ran ;
 let x;//药剂底部与判定线的距离
 let bulState = 0;//子弹存在的状态
 let gameState = 0;//游戏运行状态
+let scores = 0;
 
 
 
@@ -46,7 +49,7 @@ function setup() {
 	}
 	socket.on('game', function(data){//接收游戏状态
 		gameState = data.gameStateTemp;
-		console.log(gameState);
+		// console.log(gameState);
 
 	});
 
@@ -99,7 +102,7 @@ function draw(){
 	 
 
 	socket.on('keys', function(data){
-		console.log('start');
+		// console.log('start');
 		gameState = 1;
 	  	cha = data.chaTemp;
 		dan = data.danTemp;
@@ -163,6 +166,7 @@ function draw(){
 		if(d1 < 30 & needleState == 1){
 			ran = random(330, 420);
 			needleState = 0;
+			scores++;
 			// virusR += 10;//放到服务端上
 			socket.emit('virus', data);
 			// console.log(virusR);
@@ -183,6 +187,7 @@ function draw(){
 
 	}
 	if(gameState){
+		text('scores: '+scores, 20, 20, 30, 30);
 		image(needle, width/3+25, 280, 130, 200);//显示正下方的注射器
 		strokeWeight(3);
 		fill('red');

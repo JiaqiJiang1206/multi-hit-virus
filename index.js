@@ -41,7 +41,7 @@ function newConnection(socket){
 	console.log('new connection: ' + socket.id);
 
   socket.on('game', function (data){
-    socket.broadcast.emit('game', data);//向其他所有客户端传输游戏数据
+    io.sockets.emit('game', data);//向其他所有客户端传输游戏数据
   })
 
   socket.on('keys', function (data){
@@ -55,7 +55,7 @@ function newConnection(socket){
   })
 
   socket.on('virus', function(data){
-    data.virusRtemp+=10;
+    data.virusRtemp+=5;
     io.sockets.emit('virus', data);//向其他所有客户端传输游戏数据
   })
 
