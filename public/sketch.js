@@ -168,7 +168,7 @@ function draw(){
 
 		}
 		// console.log(d1);
-		if(200-virusR > 165){//根据病毒大小判定游戏结束
+		if(200-virusR > 105){//根据病毒大小判定游戏结束
 			image(evilVirus, width/3+virusR/2, 0, 200-virusR, 200-virusR);//显示正上方的病毒
 		}else{
 			image(boom, width/3+virusR/2, 0, 200-virusR, 200-virusR);//显示爆炸效果
