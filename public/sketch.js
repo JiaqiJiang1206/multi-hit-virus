@@ -22,6 +22,8 @@ function preload(){
 
 function setup() {
 	// socket = io.connect('http://localhost:3000');
+	// socket = io.connect('http://5386w319o8.qicp.vip');
+	// socket = io.connect('http://192.168.8.160:3000');
 	socket = io.connect('http://multi-hit-virus-2-2e00vpebc29921-1309180325.ap-shanghai.app.tcloudbase.com');
 	
 	video = createCapture(VIDEO);
