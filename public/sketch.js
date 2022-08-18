@@ -46,6 +46,7 @@ function setup() {
 	}
 	socket.on('game', function(data){//接收游戏状态
 		gameState = data.gameStateTemp;
+		console.log(gameState);
 
 	});
 
