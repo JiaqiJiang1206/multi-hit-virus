@@ -86,6 +86,7 @@ function keyPressed(){
 	
 
 function draw(){
+	console.log(gameState);
 	data = {
 		gameStateTemp : gameState,
 		chaTemp : cha,
