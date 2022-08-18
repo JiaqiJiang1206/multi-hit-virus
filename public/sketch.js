@@ -22,7 +22,7 @@ function preload(){
 
 function setup() {
 	// socket = io.connect('http://localhost:3000');
-	socket = io.connect('https://multi-hit-virus-7gmxg1lbce546f9f-1309180325.ap-shanghai.app.tcloudbase.com/');
+	socket = io.connect('http://multi-hit-virus-2-2e00vpebc29921-1309180325.ap-shanghai.app.tcloudbase.com');
 	
 	video = createCapture(VIDEO);
 	video.size(640, 480);
