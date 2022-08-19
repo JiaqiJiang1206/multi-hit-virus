@@ -1,4 +1,4 @@
-const { text } = require("express");
+// const { text } = require("express");
 
 //8_17_2
 var socket;
@@ -24,8 +24,8 @@ function preload(){
   }
 
 function setup() {
-	// socket = io.connect('https://multi-hit-virus.herokuapp.com/');
-	socket = io.connect('http://localhost:3000');
+	socket = io.connect('https://multi-hit-virus.herokuapp.com/');
+	// socket = io.connect('http://localhost:3000');
 	// socket = io.connect('http://192.168.8.160:3000');
 	
 	video = createCapture(VIDEO);
