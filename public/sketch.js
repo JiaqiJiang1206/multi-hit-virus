@@ -155,7 +155,7 @@ function draw(){
 			dan = 0;
 			
 			if(cha<115){
-				cha++;
+				cha+=0.5;
 				needleState = 1;
 			}else{
 				cha = 115;
@@ -203,7 +203,7 @@ function draw(){
 		}
 		
 		if(gameState){
-			rect(width/3+77, 320, width/3+80+20, 320+cha/2);//画注射剂药剂,cha = 87则满
+			rect(width/3+77, 320, width/3+80+20, 320+cha);//画注射剂药剂,cha = 87则满
 		}
 		
 
