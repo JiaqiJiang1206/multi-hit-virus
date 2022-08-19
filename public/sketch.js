@@ -75,7 +75,17 @@ function keyPressed(){
 		ran = random(330, 420);//判定线的位置
 		x = ran+3-320;//计算药剂底部与判定线的距离
 		bulState = 0;//子弹存在的状态
-		
+		data = {
+			gameStateTemp : gameState,
+			chaTemp : cha,
+			danTemp : dan,
+			needleStateTemp : needleState,
+			virusRtemp : virusR,
+			ranTemp : ran,
+			xTemp : x,
+			bulStateTemp : bulState
+	
+		}
 		socket.emit('game', data);//传输游戏状态到服务器端
 		socket.emit('keys', data);
 
