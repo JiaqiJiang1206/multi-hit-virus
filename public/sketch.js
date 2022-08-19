@@ -63,7 +63,7 @@ function setup() {
 		dan = data.danTemp;
 		needleState = data.needleStateTemp;
 		virusR = 0;
-		ran = random(330, 420);//判定线的位置
+		ran = random(370, 420);//判定线的位置
 		x = ran+3-320;
 		bulState = data.bulStateTemp;
 		scores = data.scoresTemp;
@@ -90,7 +90,7 @@ function keyPressed(){
 		dan = 0;//子弹高度
 		needleState = 0;//0：针管空的；1：针管满的，防止游戏开始直接发射子弹
 		virusR = 0;//病毒大小
-		ran = random(330, 420);//判定线的位置
+		ran = random(370, 420);//判定线的位置
 		x = ran+3-320;//计算药剂底部与判定线的距离
 		bulState = 0;//子弹存在的状态
 		scores = 0;
@@ -183,7 +183,7 @@ function draw(){
 		}
 		let d1 = dist(width/3+89, 305-dan, width/3+100, 180-virusR);//计算子弹和病毒的距离
 		if(d1 < 30 & needleState == 1){
-			ran = random(330, 420);
+			ran = random(370, 420);
 			needleState = 0;
 			scores++;
 			// virusR += 10;//放到服务端上
@@ -203,7 +203,7 @@ function draw(){
 		}
 		
 		if(gameState){
-			rect(width/3+77, 320, width/3+80+20, 320+cha);//画注射剂药剂,cha = 87则满
+			rect(width/3+77, 320, width/3+80+20, 320+cha/2);//画注射剂药剂,cha = 87则满
 		}
 		
 
