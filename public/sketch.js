@@ -1,3 +1,5 @@
+// const { text } = require("express");
+
 //8_17_2
 var socket;
 let video;
@@ -22,7 +24,8 @@ function preload(){
   }
 
 function setup() {
-	socket = io.connect('https://multi-hit-virus.herokuapp.com/');
+	// socket = io.connect('https://multi-hit-virus.herokuapp.com/');
+	socket = io.connect('http://localhost:3000');
 	// socket = io.connect('http://192.168.8.160:3000');
 	
 	video = createCapture(VIDEO);
@@ -49,6 +52,18 @@ function setup() {
 		gameState = data.gameStateTemp;
 		// console.log(gameState);
 
+	});
+
+	socket.on('keys', function(data){
+		// console.log('start');
+		gameState = 1;//data.gameStateTemp;
+	  	cha = data.chaTemp;
+		dan = data.danTemp;
+		needleState = data.needleStateTemp;
+		virusR = 0;
+		ran = random(330, 420);//判定线的位置
+		x = ran+3-320;
+		bulState = data.bulStateTemp;
 	});
 
 
@@ -109,17 +124,6 @@ function draw(){
 
 	}
 	 
-
-	socket.on('keys', function(data){
-		// console.log('start');
-		gameState = 1;
-	  	cha = data.chaTemp;
-		dan = data.danTemp;
-		needleState = data.needleStateTemp;
-		ran = random(330, 420);//判定线的位置
-		x = ran+3-320;
-		bulState = data.bulStateTemp;
-	});
 	socket.on('virus', function(data){//改变子弹状态和病毒大小
 		virusR = data.virusRtemp;
 
@@ -182,13 +186,15 @@ function draw(){
 
 		}
 		// console.log(d1);
-		if(200-virusR > 105){//根据病毒大小判定游戏结束
+		if(200-virusR > 175){//根据病毒大小判定游戏结束
 			image(evilVirus, width/3+virusR/2, 0, 200-virusR, 200-virusR);//显示正上方的病毒
 		}else{
 			image(boom, width/3+virusR/2, 0, 200-virusR, 200-virusR);//显示爆炸效果
 			gameState = 0;
+			data.gameStateTemp = gameState;
 			socket.emit('game', data);//传输游戏状态到服务器端
 		}
+		
 		if(gameState){
 			rect(width/3+77, 320, width/3+80+20, 320+cha);//画注射剂药剂,cha = 87则满
 		}
@@ -196,6 +202,7 @@ function draw(){
 
 	}
 	if(gameState){
+		// text('scores: '+scores, 20, 20, 30, 30);
 		image(needle, width/3+25, 280, 130, 200);//显示正下方的注射器
 		strokeWeight(3);
 		fill('red');

@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 
 
-console.log('server is running');
+// console.log('server is running');
 
 // app.get("/", (req, res) => {
 //   res.send(`Hello World!`);
@@ -48,9 +48,9 @@ function newConnection(socket){
 		data.chaTemp = 1;
 		data.danTemp = 0;
 		data.needleStateTemp = 0;
-
+    data.gameStateTemp = 1;
 		data.bulStateTemp = 0;
-    socket.broadcast.emit('keys', data);//向其他所有客户端传输游戏数据
+    io.sockets.emit('keys', data);//向其他所有客户端传输游戏数据
     // console.log(gameState);
   })
 
