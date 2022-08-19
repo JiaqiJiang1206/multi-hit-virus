@@ -14,6 +14,7 @@ let x;//药剂底部与判定线的距离
 let bulState = 0;//子弹存在的状态
 let gameState = 0;//游戏运行状态
 let scores = 0;
+let pic = 120;//病毒最后的大小
 
 
 
@@ -24,8 +25,8 @@ function preload(){
   }
 
 function setup() {
-	socket = io.connect('https://multi-hit-virus.herokuapp.com/');
-	// socket = io.connect('http://localhost:3000');
+	// socket = io.connect('https://multi-hit-virus.herokuapp.com/');
+	socket = io.connect('http://localhost:3000');
 	// socket = io.connect('http://192.168.8.160:3000');
 	
 	video = createCapture(VIDEO);
@@ -45,7 +46,8 @@ function setup() {
 		virusRtemp : virusR,
 		ranTemp : ran,
 		xTemp : x,
-		bulStateTemp : bulState
+		bulStateTemp : bulState,
+		scoresTemp : scores
 
 	}
 	socket.on('game', function(data){//接收游戏状态
@@ -64,6 +66,7 @@ function setup() {
 		ran = random(330, 420);//判定线的位置
 		x = ran+3-320;
 		bulState = data.bulStateTemp;
+		scores = data.scoresTemp;
 	});
 
 
@@ -90,6 +93,7 @@ function keyPressed(){
 		ran = random(330, 420);//判定线的位置
 		x = ran+3-320;//计算药剂底部与判定线的距离
 		bulState = 0;//子弹存在的状态
+		scores = 0;
 		data = {
 			gameStateTemp : gameState,
 			chaTemp : cha,
@@ -98,7 +102,8 @@ function keyPressed(){
 			virusRtemp : virusR,
 			ranTemp : ran,
 			xTemp : x,
-			bulStateTemp : bulState
+			bulStateTemp : bulState,
+			scoresTemp : scores
 	
 		}
 		socket.emit('game', data);//传输游戏状态到服务器端
@@ -111,7 +116,8 @@ function keyPressed(){
 	
 
 function draw(){
-	console.log(gameState);
+	// console.log('virusR: '+virusR);
+	// console.log(gameState);
 	data = {
 		gameStateTemp : gameState,
 		chaTemp : cha,
@@ -120,8 +126,8 @@ function draw(){
 		virusRtemp : virusR,
 		ranTemp : ran,
 		xTemp : x,
-		bulStateTemp : bulState
-
+		bulStateTemp : bulState,
+		scoresTemp : scores
 	}
 	 
 	socket.on('virus', function(data){//改变子弹状态和病毒大小
@@ -186,8 +192,9 @@ function draw(){
 
 		}
 		// console.log(d1);
-		if(200-virusR > 175){//根据病毒大小判定游戏结束
+		if(200-virusR > pic){//根据病毒大小判定游戏结束
 			image(evilVirus, width/3+virusR/2, 0, 200-virusR, 200-virusR);//显示正上方的病毒
+			
 		}else{
 			image(boom, width/3+virusR/2, 0, 200-virusR, 200-virusR);//显示爆炸效果
 			gameState = 0;
@@ -201,10 +208,21 @@ function draw(){
 		
 
 	}
+	strokeWeight(1);
+	stroke(51);
+	fill(0, 0, 0, 0);
+	rect(400, 20, 600, 40);
+	fill('red');
+	let cal = 1000/(200-pic);
+	rect(400, 20, 600-cal*virusR/5, 40);
 	if(gameState){
-		// text('scores: '+scores, 20, 20, 30, 30);
+		strokeWeight(1);
+		stroke(51);
+		textSize(30);
+		fill('#03A9F4');
+		text('scores: '+scores, 30, 40);
 		image(needle, width/3+25, 280, 130, 200);//显示正下方的注射器
-		strokeWeight(3);
+		noStroke();
 		fill('red');
 		rect(width/3+77, ran, width/3+80+20, ran+3);//判定线
 	}
