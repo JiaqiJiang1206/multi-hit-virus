@@ -26,8 +26,8 @@ function preload(){
 
 function setup() {
 	
-	socket = io.connect('https://multi-hit-virus-7gjqnt40c3aaa635-1309180325.ap-shanghai.app.tcloudbase.com/');
-	//socket = io.connect('https://multi-hit-virus.herokuapp.com/');
+	// socket = io.connect('https://multi-hit-virus-7gjqnt40c3aaa635-1309180325.ap-shanghai.app.tcloudbase.com/');
+	socket = io.connect('https://multi-hit-virus.herokuapp.com/');
 	// socket = io.connect('http://localhost:3000');
 	// socket = io.connect('http://192.168.8.160:3000');
 	
